@@ -341,7 +341,9 @@ class SIFormState  extends State<SIForm>{
     double totalAmountPayable =principal+(principal*rio*term)/100;
     Values  valores =  new Values(type: _currentItemSelected, result:totalAmountPayable.toString() );
     historico.add(valores);
+    reset();
     return  'After $term years, your investiment will be worth $totalAmountPayable $_currentItemSelected';
+
   }
   void reset(){
     setState(() {
@@ -405,6 +407,42 @@ class Sample extends State<PageHistorico>{
             ),
 
 
+        ),
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+             setState(() {
+                widget.list.clear();
+                showDialog(
+                   context: context , child: AlertDialog(
+                    content: Container(
+                       width: 200,
+                       height:80,
+                       child: Center(
+                          child: Column(
+                             children: <Widget>[
+                                Text('Cleaned with Sucess!' , style: TextStyle(
+                                  color: Colors.white ,
+                                ),) ,
+                                FlatButton(
+                                   child:Text('Ok' , style: TextStyle(
+                                      color: Colors.blue ,
+                                   ),),
+                                   onPressed: (){
+                                      Navigator.of(context).pop();
+                                   },
+                                )
+                             ],
+                          ),
+                       ),
+                    ),
+                )
+                );
+             });
+          } ,
+
+          backgroundColor: Colors.blueAccent,
+          child:Icon(Icons.clear ,size: 17, color: Colors.white,) ,
         ),
 
       );
